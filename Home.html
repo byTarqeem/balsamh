@@ -1,0 +1,2266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GasWellness - My Impact</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================= CSS VARIABLES & ROOT ================= */
+        :root {
+            --primary: #0f4bff;
+            --primary-light: #2f65e8;
+            --primary-dark: #0a2fa8;
+            --secondary: #2f65e8;
+            --accent: #00d4ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --neutral-50: #f9fafb;
+            --neutral-100: #f5f7fc;
+            --neutral-200: #e5e7eb;
+            --neutral-300: #d1d5db;
+            --neutral-400: #9ca3af;
+            --neutral-600: #4b5563;
+            --neutral-700: #374151;
+            --neutral-800: #1f2937;
+            --neutral-900: #111827;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --glass-bg: rgba(20, 20, 30, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neutral-50: #1f2937;
+            --neutral-100: #111827;
+            --neutral-200: #1f2937;
+            --neutral-600: #d1d5db;
+            --neutral-700: #e5e7eb;
+            --neutral-800: #f3f4f6;
+            --neutral-900: #f9fafb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, var(--neutral-100) 0%, #f0f4ff 100%);
+            color: var(--neutral-800);
+            line-height: 1.6;
+            transition: background 0.5s var(--ease-out), color 0.5s var(--ease-out);
+            min-height: 100vh;
+            padding-top: 104px;
+        }
+
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
+            color: var(--neutral-800);
+        }
+
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 88px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 18px 45px rgba(15, 75, 255, 0.12);
+            animation: slideInDown 0.6s var(--ease-out);
+        }
+
+        .site-header__container {
+            width: 90%;
+            max-width: 1300px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .brand-tag {
+            font-size: 13px;
+            color: var(--neutral-600);
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-link {
+            color: var(--neutral-700);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 14px;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: rgba(15, 75, 255, 0.1);
+        }
+
+        .nav-link.active {
+            background: rgba(15, 75, 255, 0.14);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .profile-panel {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .profile-info {
+            text-align: right;
+        }
+
+        .profile-name {
+            display: block;
+            font-weight: 700;
+            color: var(--neutral-900);
+        }
+
+        .profile-role {
+            display: block;
+            font-size: 13px;
+            color: var(--neutral-600);
+        }
+
+        .profile-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            object-fit: cover;
+        }
+
+        .theme-toggle {
+            width: 52px;
+            height: 28px;
+            border-radius: 999px;
+            border: none;
+            background: var(--neutral-300);
+            color: var(--neutral-900);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 10px;
+            transition: var(--transition);
+        }
+
+        .theme-toggle.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .theme-toggle i {
+            font-size: 14px;
+        }
+
+        @media (max-width: 920px) {
+            .site-header__container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .site-nav {
+                width: 100%;
+                justify-content: center;
+                gap: 14px;
+            }
+            .profile-panel {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        /* ================= LOADING ANIMATION ================= */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0f4bff 0%, #2f65e8 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.8s var(--ease-out), visibility 0.8s var(--ease-out);
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-animation {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 40px;
+        }
+
+        .loading-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1.2s linear infinite;
+        }
+
+        .loading-circle:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            animation: spin 1.5s linear infinite reverse;
+        }
+
+        .loading-circle:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            animation: spin 1.8s linear infinite;
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s var(--ease-out);
+        }
+
+        .loading-subtext {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            animation: fadeInUp 0.8s var(--ease-out);
+        }
+
+        /* ================= ANIMATIONS ================= */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(15, 75, 255, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(15, 75, 255, 0.6); }
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ================= UTILITY CLASSES ================= */
+        .fade-in {
+            animation: fadeInUp 0.6s var(--ease-out) forwards;
+        }
+
+        .slide-in-down {
+            animation: slideInDown 0.6s var(--ease-out) forwards;
+        }
+
+        .slide-in-up {
+            animation: slideInUp 0.6s var(--ease-out) forwards;
+        }
+
+        .scale-in {
+            animation: scaleIn 0.5s var(--ease-bounce) forwards;
+        }
+
+        /* ================= NAVBAR ================= */
+        .navbar {
+            height: 72px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 120px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            animation: slideInDown 0.6s var(--ease-out);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(15, 75, 255, 0.3);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            color: var(--neutral-700);
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-btn:hover {
+            background: rgba(15, 75, 255, 0.1);
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--danger);
+            border-radius: 50%;
+            top: 8px;
+            right: 8px;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 50px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .navbar nav a {
+            text-decoration: none;
+            color: var(--neutral-700);
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .navbar nav a:hover {
+            color: var(--primary);
+            background: rgba(15, 75, 255, 0.1);
+        }
+
+        .navbar nav a.active {
+            color: var(--primary);
+            font-weight: 700;
+            background: rgba(15, 75, 255, 0.15);
+        }
+
+        .navbar nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 12px;
+            right: 12px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .logo {
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            width: 50px;
+            height: 26px;
+            background: var(--neutral-300);
+            border: none;
+            border-radius: 13px;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            padding: 0 3px;
+        }
+
+        .theme-toggle.active {
+            background: var(--primary);
+        }
+
+        .theme-toggle::after {
+            content: '';
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: var(--transition);
+            transform: translateX(0);
+        }
+
+        .theme-toggle.active::after {
+            transform: translateX(24px);
+        }
+
+        .theme-toggle i {
+            position: absolute;
+            font-size: 12px;
+            color: white;
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .theme-toggle i:first-of-type {
+            left: 6px;
+        }
+
+        .theme-toggle i:last-of-type {
+            right: 6px;
+        }
+
+        /* ================= MAIN CONTAINER ================= */
+        .container {
+            width: 85%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 0 100px;
+            animation: fadeInUp 0.8s var(--ease-out);
+        }
+
+        /* ================= HERO BANNER ================= */
+        .impact-banner {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+            border-radius: 32px;
+            padding: 50px 60px;
+            min-height: 280px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(15, 75, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.8s var(--ease-out);
+        }
+
+        .impact-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300"><path d="M0,150 Q300,100 600,150 T1200,150" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/><path d="M0,200 Q300,150 600,200 T1200,200" stroke="rgba(255,255,255,0.05)" stroke-width="2" fill="none"/></svg>');
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .progress-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-circle svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle .bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.2);
+            stroke-width: 12;
+            stroke-linecap: round;
+        }
+
+        .progress-circle .progress {
+            fill: none;
+            stroke: white;
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-dasharray: 565;
+            stroke-dashoffset: 565;
+            animation: fillProgress 2.5s var(--ease-out) forwards;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        @keyframes fillProgress {
+            to { stroke-dashoffset: 85; }
+        }
+
+        .progress-content {
+            position: absolute;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .progress-content h2 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            animation: countUp 2.5s var(--ease-out) forwards;
+        }
+
+        .progress-content span {
+            font-size: 14px;
+            opacity: 0.95;
+            display: block;
+            animation: fadeInUp 2s var(--ease-out) forwards;
+        }
+
+        .banner-content {
+            text-align: right;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .banner-content h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            animation: slideInDown 0.8s var(--ease-out);
+        }
+
+        .banner-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            line-height: 1.6;
+            animation: slideInDown 1s var(--ease-out);
+        }
+
+        .streak-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+            animation: slideInUp 1.2s var(--ease-out);
+            cursor: pointer;
+        }
+
+        .streak-badge:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ================= STATS GRID ================= */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .energy-card,
+        .badge-card,
+        .upcoming-card,
+        .positivity-card,
+        .impact-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            animation: slideInUp 0.8s var(--ease-out);
+        }
+
+        .energy-card:hover,
+        .badge-card:hover,
+        .upcoming-card:hover,
+        .positivity-card:hover,
+        .impact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(15, 75, 255, 0.15);
+            border-color: rgba(15, 75, 255, 0.3);
+        }
+
+        /* ENERGY CARD */
+        .energy-card {
+            padding: 50px 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation-delay: 0.1s;
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(15, 75, 255, 0.2), rgba(47, 101, 232, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 40px;
+            border: 2px solid rgba(15, 75, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .energy-card:hover .icon-circle {
+            background: linear-gradient(135deg, rgba(15, 75, 255, 0.3), rgba(47, 101, 232, 0.2));
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .energy-card h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .energy-card p {
+            color: var(--neutral-700);
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .small-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(15, 75, 255, 0.1);
+            border-radius: 20px;
+            margin: 30px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .small-progress .fill {
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 20px;
+            animation: slideInLeft 1.5s var(--ease-out) forwards;
+        }
+
+        @keyframes slideInLeft {
+            from { width: 0%; }
+            to { width: 70%; }
+        }
+
+        .energy-card small {
+            color: var(--neutral-600);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* BADGE CARD */
+        .badge-card {
+            padding: 45px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            animation-delay: 0.2s;
+        }
+
+        .badge-info {
+            flex: 1;
+        }
+
+        .label {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(15, 75, 255, 0.15), rgba(47, 101, 232, 0.1));
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(15, 75, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .badge-card:hover .label {
+            background: linear-gradient(135deg, rgba(15, 75, 255, 0.25), rgba(47, 101, 232, 0.15));
+        }
+
+        .badge-info h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--neutral-900);
+        }
+
+        [data-theme="dark"] .badge-info h2 {
+            color: white;
+        }
+
+        .badge-info p {
+            line-height: 1.8;
+            max-width: 420px;
+            color: var(--neutral-700);
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .badge-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .outline-btn,
+        .secondary-btn {
+            border: none;
+            padding: 14px 32px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(15, 75, 255, 0.3);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(15, 75, 255, 0.4);
+        }
+
+        .primary-btn:active {
+            transform: translateY(0);
+        }
+
+        .outline-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            margin-top: 0;
+        }
+
+        .outline-btn:hover {
+            background: rgba(15, 75, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: rgba(15, 75, 255, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(15, 75, 255, 0.3);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(15, 75, 255, 0.2);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .badge-image {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #8af0de, #5edbdc);
+            border-radius: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 90px;
+            box-shadow: 0 15px 40px rgba(138, 240, 222, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-15px) scale(1.02); }
+        }
+
+        /* ================= BOTTOM GRID ================= */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .upcoming-card,
+        .positivity-card {
+            padding: 45px;
+            animation-delay: 0.3s;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .upcoming-card h3,
+        .positivity-card h3 {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--neutral-900);
+            margin-bottom: 25px;
+        }
+
+        [data-theme="dark"] .upcoming-card h3,
+        [data-theme="dark"] .positivity-card h3 {
+            color: white;
+        }
+
+        .badge-list {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            gap: 15px;
+        }
+
+        .badge-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(15, 75, 255, 0.05);
+            border: 2px solid rgba(15, 75, 255, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .badge-item:hover {
+            background: rgba(15, 75, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .badge-item div {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .badge-item span {
+            color: var(--neutral-700);
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .badge-item .progress-text {
+            color: var(--primary);
+            font-size: 12px;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .badge-progress {
+            width: 100%;
+            height: 6px;
+            background: rgba(15, 75, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .badge-progress .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 10px;
+            transition: width 1.5s var(--ease-out);
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(249, 115, 115, 0.05));
+            color: #dc2626;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 1.6;
+            animation: slideInUp 1s var(--ease-out);
+        }
+
+        .alert-box.success {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.05));
+            color: #059669;
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .alert-box.warning {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.05));
+            color: #d97706;
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        .positivity-card p {
+            color: var(--neutral-700);
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .status {
+            color: var(--success);
+            font-weight: 700;
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            gap: 8px;
+            height: 150px;
+            margin-top: 30px;
+            padding: 20px 10px;
+            background: rgba(15, 75, 255, 0.03);
+            border-radius: 16px;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(180deg, rgba(15, 75, 255, 0.2), rgba(15, 75, 255, 0.05));
+            border-radius: 8px 8px 0 0;
+            border: 1px solid rgba(15, 75, 255, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            min-width: 20px;
+        }
+
+        .bar:hover {
+            background: linear-gradient(180deg, rgba(15, 75, 255, 0.4), rgba(15, 75, 255, 0.1));
+            transform: translateY(-5px);
+        }
+
+        .bar.active {
+            background: linear-gradient(180deg, var(--primary), var(--primary-light));
+            box-shadow: 0 10px 30px rgba(15, 75, 255, 0.3);
+        }
+
+        .bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .bar:hover::after,
+        .bar.active::after {
+            opacity: 1;
+        }
+
+        /* ================= TEAM IMPACT SECTION ================= */
+        .team-impact {
+            animation: slideInUp 0.8s var(--ease-out);
+        }
+
+        .team-impact h2 {
+            text-align: right;
+            margin-bottom: 40px;
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--neutral-900);
+        }
+
+        [data-theme="dark"] .team-impact h2 {
+            color: white;
+        }
+
+        .impact-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .impact-card {
+            padding: 50px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation-delay: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(15, 75, 255, 0.1), transparent);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .impact-card:hover::before {
+            top: 0;
+            right: 0;
+        }
+
+        .impact-card .icon {
+            font-size: 50px;
+            margin-bottom: 25px;
+            animation: slideInDown 0.8s var(--ease-out);
+        }
+
+        .impact-card h3 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .impact-card p {
+            color: var(--neutral-700);
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* ================= ACHIEVEMENT NOTIFICATION ================= */
+        .achievement-popup {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: slideInDown 0.5s var(--ease-out);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 500px;
+        }
+
+        .achievement-popup.success {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .achievement-popup.hidden {
+            animation: slideInUp 0.5s var(--ease-out) reverse;
+            opacity: 0;
+        }
+
+        .achievement-icon {
+            font-size: 40px;
+            animation: scaleIn 0.6s var(--ease-bounce);
+        }
+
+        .achievement-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--neutral-900);
+        }
+
+        [data-theme="dark"] .achievement-content h3 {
+            color: white;
+        }
+
+        .achievement-content p {
+            font-size: 14px;
+            color: var(--neutral-700);
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+            padding: 80px 20px;
+            text-align: center;
+            margin-top: 100px;
+            animation: slideInUp 1.2s var(--ease-out);
+        }
+
+        footer p {
+            margin-bottom: 20px;
+            color: var(--neutral-700);
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--neutral-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s var(--ease-out);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ================= RESPONSIVE DESIGN ================= */
+        @media (max-width: 1400px) {
+            .container {
+                width: 90%;
+            }
+
+            .navbar {
+                padding: 0 50px;
+            }
+
+            .impact-banner {
+                padding: 40px 50px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                width: 92%;
+            }
+
+            .navbar {
+                padding: 0 40px;
+            }
+
+            .navbar nav {
+                gap: 30px;
+            }
+
+            .navbar nav a {
+                font-size: 14px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .navbar nav {
+                position: static;
+                transform: none;
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-left, .logo {
+                position: absolute;
+            }
+
+            .nav-left {
+                left: 20px;
+            }
+
+            .logo {
+                right: 20px;
+            }
+
+            .container {
+                width: 95%;
+                padding: 20px 0 60px;
+            }
+
+            .impact-banner {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+                padding: 40px 30px;
+                min-height: auto;
+            }
+
+            .banner-content h1 {
+                font-size: 40px;
+            }
+
+            .banner-content p {
+                font-size: 16px;
+            }
+
+            .badge-card {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .badge-image {
+                width: 160px;
+                height: 160px;
+                font-size: 70px;
+            }
+
+            .bottom-grid,
+            .impact-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding: 60px 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                height: auto;
+                flex-direction: column;
+                gap: 15px;
+                padding: 12px 16px;
+            }
+
+            .nav-left, .logo {
+                position: relative;
+            }
+
+            .navbar nav {
+                width: 100%;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .navbar nav a,
+            .navbar nav a.active {
+                text-decoration: none;
+                padding: 12px 16px;
+                border-radius: 8px;
+            }
+
+            .navbar nav a.active::after {
+                display: none;
+            }
+
+            .container {
+                padding: 20px 0 40px;
+            }
+
+            .impact-banner {
+                padding: 30px 20px;
+                gap: 20px;
+            }
+
+            .progress-circle {
+                width: 150px;
+                height: 150px;
+            }
+
+            .progress-content h2 {
+                font-size: 40px;
+            }
+
+            .banner-content h1 {
+                font-size: 32px;
+                margin-bottom: 15px;
+            }
+
+            .banner-content p {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .badge-info h2 {
+                font-size: 28px;
+            }
+
+            .badge-image {
+                width: 140px;
+                height: 140px;
+                font-size: 60px;
+            }
+
+            .energy-card {
+                padding: 30px 20px;
+            }
+
+            .energy-card h2 {
+                font-size: 36px;
+            }
+
+            .icon-circle {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+            }
+
+            .upcoming-card,
+            .positivity-card,
+            .badge-card {
+                padding: 30px 20px;
+            }
+
+            .upcoming-card h3,
+            .positivity-card h3,
+            .team-impact h2 {
+                font-size: 24px;
+            }
+
+            .badge-list {
+                flex-direction: column;
+                margin: 20px 0;
+            }
+
+            .badge-item {
+                padding: 15px;
+            }
+
+            .chart {
+                height: 120px;
+                gap: 6px;
+                margin-top: 20px;
+                padding: 15px 5px;
+            }
+
+            .bar {
+                min-width: 15px;
+            }
+
+            .impact-cards {
+                gap: 20px;
+            }
+
+            .impact-card {
+                padding: 30px 20px;
+            }
+
+            .impact-card .icon {
+                font-size: 40px;
+                margin-bottom: 15px;
+            }
+
+            .impact-card h3 {
+                font-size: 28px;
+            }
+
+            .impact-card p {
+                font-size: 14px;
+            }
+
+            .primary-btn,
+            .outline-btn,
+            .secondary-btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+
+            .badge-buttons {
+                flex-direction: column;
+            }
+
+            .achievement-popup {
+                width: 90%;
+                left: 5%;
+                transform: none;
+                top: 80px;
+                padding: 20px 25px;
+                gap: 15px;
+            }
+
+            .achievement-icon {
+                font-size: 32px;
+            }
+
+            .achievement-content h3 {
+                font-size: 16px;
+            }
+
+            .achievement-content p {
+                font-size: 12px;
+            }
+
+            footer {
+                padding: 40px 16px;
+            }
+
+            .footer-links {
+                gap: 20px;
+                flex-direction: column;
+            }
+        }
+
+        /* ================= ACCESSIBILITY ================= */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus states for keyboard navigation */
+        button:focus,
+        a:focus,
+        input:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .primary-btn:focus,
+        .outline-btn:focus,
+        .secondary-btn:focus {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-animation">
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+        </div>
+        <div class="loading-text">GasWellness</div>
+        <div class="loading-subtext">جاري تحميل GasWellness...</div>
+    </div>
+
+    <!-- Achievement Notification -->
+    <div class="achievement-popup" id="achievementPopup" style="display: none;">
+        <div class="achievement-icon">
+            <i class="fas fa-trophy"></i>
+        </div>
+        <div class="achievement-content">
+            <h3 id="achievementTitle">إنجاز جديد!</h3>
+            <p id="achievementMessage">تم فتح وسام جديد</p>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="site-header">
+        <div class="site-header__container">
+            <a href="index.html" class="brand-link">
+                <img src="assets/logo.svg" alt="GasWellness Logo" class="brand-logo">
+                <div class="brand-text">
+                    <span class="brand-name">GasWellness</span>
+                    <span class="brand-tag">الرفاه الصناعي</span>
+                </div>
+            </a>
+
+            <nav class="site-nav">
+                <a href="index.html" class="nav-link">الاستطلاع السريع</a>
+                <a href="Home.html" class="nav-link active">تقرير التأثير</a>
+                <a href="page3.html" class="nav-link">نبض اليوم</a>
+            </nav>
+
+            <div class="profile-panel">
+                <div class="profile-info">
+                    <span class="profile-name">محمد العلي</span>
+                    <span class="profile-role">مدير النظام</span>
+                </div>
+                <button class="theme-toggle" id="themeToggle" title="تبديل الوضع الداكن">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                <img src="assets/avatar.svg" alt="User Avatar" class="profile-avatar">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- HERO BANNER -->
+        <section class="impact-banner fade-in">
+
+            <div class="progress-circle">
+                <svg viewBox="0 0 200 200" width="200" height="200">
+                    <circle class="bg" cx="100" cy="100" r="90" stroke-width="12"></circle>
+                    <circle class="progress" cx="100" cy="100" r="90" stroke-width="12" data-progress="85"></circle>
+                </svg>
+
+                <div class="progress-content">
+                    <h2 id="progressValue">0</h2>
+                    <span>اكتمال الهدف</span>
+                </div>
+            </div>
+
+            <div class="banner-content">
+                <h1>
+                    <i class="fas fa-star"></i> أثري وتفاعلي
+                </h1>
+
+                <p>
+                    لقد ساهمت في تحسين بيئة العمل لمدة
+                    <span id="streakDays">10</span> أيام متتالية 🎉
+                </p>
+
+                <span class="streak-badge" title="شارك إنجازك">
+                    <i class="fas fa-fire"></i> سلسلة إنجاز <span id="badgeStreak">10</span> أيام
+                </span>
+            </div>
+
+        </section>
+
+        <!-- STATS GRID -->
+        <section class="stats-grid">
+
+            <!-- ENERGY CARD -->
+            <div class="energy-card fade-in">
+
+                <div class="icon-circle">
+                    <i class="fas fa-bolt"></i>
+                </div>
+
+                <h2 id="energyPoints">0</h2>
+
+                <p>نقاط الطاقة المكتسبة</p>
+
+                <div class="small-progress">
+                    <div class="fill"></div>
+                </div>
+
+                <small>
+                    باقي <span id="pointsRemaining">250</span> نقطة للترقية
+                </small>
+
+            </div>
+
+            <!-- CURRENT BADGE -->
+            <div class="badge-card fade-in">
+
+                <div class="badge-info">
+
+                    <span class="label">
+                        <i class="fas fa-medal"></i> الوسام الحالي
+                    </span>
+
+                    <h2>الموظف الواعي</h2>
+
+                    <p>
+                        أنت ضمن أفضل 5% من الموظفين الملتزمين
+                        بجلسات التأمل الأسبوعية وتحسين جودة العمل
+                        الجماعي. استمر على هذا النحو الرائع!
+                    </p>
+
+                    <div class="badge-buttons">
+                        <button class="primary-btn" onclick="showAchievementPopup('شارك إنجازك', 'تم نسخ رابط الإنجاز!')">
+                            <i class="fas fa-share-alt"></i> مشاركة الإنجاز
+                        </button>
+
+                        <button class="outline-btn" onclick="alert('التفاصيل الكاملة عن الوسام')">
+                            <i class="fas fa-info-circle"></i> التفاصيل
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="badge-image">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- UPCOMING BADGES & POSITIVITY -->
+        <section class="bottom-grid">
+
+            <!-- UPCOMING BADGES -->
+            <div class="upcoming-card fade-in">
+
+                <h3>
+                    <i class="fas fa-crown"></i> الأوسمة القادمة
+                </h3>
+
+                <div class="badge-list">
+
+                    <div class="badge-item" title="روح الفريق - 60% مكتمل">
+                        <div>👥</div>
+                        <span>روح الفريق</span>
+                        <div class="badge-progress" style="width: 100%; margin-top: 8px;">
+                            <div class="fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">60%</span>
+                    </div>
+
+                    <div class="badge-item" title="التركيز العميق - 80% مكتمل">
+                        <div>💡</div>
+                        <span>التركيز العميق</span>
+                        <div class="badge-progress" style="width: 100%; margin-top: 8px;">
+                            <div class="fill" style="width: 80%;"></div>
+                        </div>
+                        <span class="progress-text">80%</span>
+                    </div>
+
+                    <div class="badge-item" title="تأثير إيجابي - 40% مكتمل">
+                        <div>🍃</div>
+                        <span>تأثير إيجابي</span>
+                        <div class="badge-progress" style="width: 100%; margin-top: 8px;">
+                            <div class="fill" style="width: 40%;"></div>
+                        </div>
+                        <span class="progress-text">40%</span>
+                    </div>
+
+                </div>
+
+                <div class="alert-box warning">
+                    <i class="fas fa-lightbulb"></i> بإكمال 5 جلسات تركيز أخرى ستحصل
+                    على وسام "التركيز العميق"
+                </div>
+
+            </div>
+
+            <!-- POSITIVITY INDICATOR -->
+            <div class="positivity-card fade-in">
+
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-smile"></i> مؤشر الإيجابية
+                    </h3>
+                    <span style="font-size: 32px;">😊</span>
+                </div>
+
+                <p>
+                    <i class="fas fa-users"></i> التفاعل مع الزملاء
+                </p>
+
+                <span class="status">
+                    <i class="fas fa-check-circle"></i> عالي جداً
+                </span>
+
+                <div class="chart">
+                    <div class="bar" data-value="65" style="height: 65%;"></div>
+                    <div class="bar" data-value="72" style="height: 72%;"></div>
+                    <div class="bar" data-value="68" style="height: 68%;"></div>
+                    <div class="bar active" data-value="85" style="height: 85%;"></div>
+                    <div class="bar" data-value="70" style="height: 70%;"></div>
+                    <div class="bar" data-value="55" style="height: 55%;"></div>
+                </div>
+
+                <small style="display: block; margin-top: 15px; color: var(--neutral-600); text-align: center;">
+                    <i class="fas fa-calendar-alt"></i> اليوم والأيام الخمسة الماضية
+                </small>
+
+            </div>
+
+        </section>
+
+        <!-- TEAM IMPACT SECTION -->
+        <section class="team-impact fade-in">
+
+            <h2>
+                <i class="fas fa-handshake"></i> أثرك في فريقك
+            </h2>
+
+            <div class="impact-cards">
+
+                <div class="impact-card fade-in">
+                    <div class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>
+                        <span class="counter" data-target="15">0</span>%+
+                    </h3>
+                    <p>تحسن في إنتاجية الفريق</p>
+                </div>
+
+                <div class="impact-card fade-in">
+                    <div class="icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>صانع الإيجابية</h3>
+                    <p>اللقب الأكثر تداولاً لك</p>
+                </div>
+
+                <div class="impact-card fade-in">
+                    <div class="icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>
+                        <span class="counter" data-target="12">0</span>
+                    </h3>
+                    <p>رسالة تقدير متبادلة</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            <i class="fas fa-copyright"></i> 2024 Liquefied Gas Corp.
+            <br>
+            جميع بيانات الموظفين سرية تماماً ومشفرة بأعلى معايير الأمان.
+        </p>
+
+        <div class="footer-links">
+            <a href="#" title="سياسة الخصوصية">
+                <i class="fas fa-lock"></i> سياسة الخصوصية
+            </a>
+            <a href="#" title="الدعم الفني">
+                <i class="fas fa-headset"></i> الدعم الفني
+            </a>
+            <a href="#" title="أخلاقيات الرفاهية">
+                <i class="fas fa-handshake"></i> أخلاقيات الرفاهية
+            </a>
+        </div>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ================= INITIALIZATION & CONFIGURATION =================
+        const CONFIG = {
+            animationDuration: 2000,
+            chartUpdateInterval: 1000,
+            loadingScreenDuration: 1800
+        };
+
+        // ================= DARK MODE TOGGLE =================
+        function initThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Check saved preference or system preference
+            const savedTheme = localStorage.getItem('theme') || (prefersDark.matches ? 'dark' : 'light');
+            
+            // Apply saved theme
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.classList.add('active');
+            }
+
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                themeToggle.classList.toggle('active');
+                
+                // Haptic feedback for supported devices
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            });
+        }
+
+        // ================= LOADING SCREEN =================
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 800);
+            }, CONFIG.loadingScreenDuration);
+        }
+
+        // ================= PROGRESS CIRCLE ANIMATION =================
+        function animateProgressCircle() {
+            const progressCircle = document.querySelector('.progress-circle .progress');
+            const targetProgress = parseInt(progressCircle.getAttribute('data-progress')) || 85;
+            
+            if (progressCircle && progressCircle.r) {
+                const radius = progressCircle.r.baseVal.value;
+                const circumference = 2 * Math.PI * radius;
+                
+                progressCircle.style.strokeDasharray = circumference;
+                progressCircle.style.strokeDashoffset = circumference;
+                
+                setTimeout(() => {
+                    const offset = circumference - (targetProgress / 100) * circumference;
+                    progressCircle.style.strokeDashoffset = offset;
+                }, 100);
+            }
+
+            // Animate progress value
+            animateCounter(document.getElementById('progressValue'), 0, targetProgress, CONFIG.animationDuration);
+        }
+
+        // ================= COUNTER ANIMATION =================
+        function animateCounter(element, start, end, duration = 1500) {
+            if (!element) return;
+
+            let startTime = null;
+            const step = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = (timestamp - startTime) / duration;
+
+                if (progress < 1) {
+                    const value = Math.floor(start + (end - start) * easeOutQuad(progress));
+                    element.textContent = value.toLocaleString('ar-SA');
+                    requestAnimationFrame(step);
+                } else {
+                    element.textContent = end.toLocaleString('ar-SA');
+                }
+            };
+
+            requestAnimationFrame(step);
+        }
+
+        // Easing function for smooth animation
+        function easeOutQuad(t) {
+            return t * (2 - t);
+        }
+
+        // ================= ANIMATE ALL COUNTERS =================
+        function animateAllCounters() {
+            const counters = document.querySelectorAll('.counter');
+            
+            counters.forEach((counter, index) => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                setTimeout(() => {
+                    animateCounter(counter, 0, target, 2000);
+                }, index * 200);
+            });
+
+            // Animate energy points
+            animateCounter(document.getElementById('energyPoints'), 0, 1250, 2500);
+            
+            // Animate points remaining
+            const pointsRemaining = document.getElementById('pointsRemaining');
+            if (pointsRemaining) {
+                animateCounter(pointsRemaining, 0, 250, 2000);
+            }
+        }
+
+        // ================= CHART ANIMATION =================
+        function animateChart() {
+            const bars = document.querySelectorAll('.chart .bar');
+            bars.forEach((bar, index) => {
+                const height = bar.style.height;
+                bar.style.height = '0';
+                
+                setTimeout(() => {
+                    bar.style.transition = 'height 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                    bar.style.height = height;
+                }, index * 100);
+            });
+        }
+
+        // ================= ACHIEVEMENT NOTIFICATION =================
+        function showAchievementPopup(title, message, duration = 4000) {
+            const popup = document.getElementById('achievementPopup');
+            document.getElementById('achievementTitle').textContent = title;
+            document.getElementById('achievementMessage').textContent = message;
+            
+            popup.style.display = 'flex';
+            popup.classList.remove('hidden', 'success');
+            popup.classList.add('success');
+
+            // Auto-hide after duration
+            setTimeout(() => {
+                popup.classList.add('hidden');
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                }, 500);
+            }, duration);
+
+            // Haptic feedback
+            if (navigator.vibrate) {
+                navigator.vibrate([30, 20, 30]);
+            }
+        }
+
+        // ================= INTERSECTION OBSERVER FOR ANIMATIONS =================
+        function initIntersectionObserver() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('fade-in')) {
+                            entry.target.style.animation = 'fadeInUp 0.6s var(--ease-out) forwards';
+                        }
+                        
+                        // Trigger chart animation when visible
+                        if (entry.target.classList.contains('chart')) {
+                            animateChart();
+                            observer.unobserve(entry.target);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in, .chart').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // ================= BUTTON INTERACTIONS =================
+        function initializeButtons() {
+            const buttons = document.querySelectorAll('.primary-btn, .outline-btn, .secondary-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Ripple effect
+                    const rect = this.getBoundingClientRect();
+                    const ripple = document.createElement('span');
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(255, 255, 255, 0.7)';
+                    ripple.style.width = ripple.style.height = '10px';
+                    ripple.style.left = (e.clientX - rect.left - 5) + 'px';
+                    ripple.style.top = (e.clientY - rect.top - 5) + 'px';
+                    ripple.style.animation = 'ripple 0.6s ease-out';
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        }
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(40);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ================= HOVER EFFECTS FOR CARDS =================
+        function initializeCardHovers() {
+            const cards = document.querySelectorAll('.energy-card, .badge-card, .upcoming-card, .positivity-card, .impact-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        }
+
+        // ================= KEYBOARD NAVIGATION =================
+        function initializeKeyboardNav() {
+            document.addEventListener('keydown', (e) => {
+                // Tab navigation already handled by browser
+                // Add custom shortcuts here if needed
+            });
+        }
+
+        // ================= RESPONSIVE INTERACTION =================
+        function handleResponsiveInteractions() {
+            const navbar = document.querySelector('.navbar');
+            let lastScrollTop = 0;
+
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                
+                // Hide/show navbar on scroll (optional)
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                } else {
+                    // Scrolling up
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+        }
+
+        // ================= MAIN INITIALIZATION =================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize all features
+            initThemeToggle();
+            hideLoadingScreen();
+            animateProgressCircle();
+            animateAllCounters();
+            animateChart();
+            initIntersectionObserver();
+            initializeButtons();
+            initializeCardHovers();
+            initializeKeyboardNav();
+            handleResponsiveInteractions();
+
+            // Show achievement after a delay
+            setTimeout(() => {
+                showAchievementPopup('🎉 عظيم!', 'لقد حققت أهدافك اليومية!', 5000);
+            }, 3000);
+
+            // Badge progress animation
+            const badgeProgresses = document.querySelectorAll('.badge-progress .fill');
+            badgeProgresses.forEach((fill, index) => {
+                const width = fill.style.width;
+                fill.style.width = '0';
+                setTimeout(() => {
+                    fill.style.transition = 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    fill.style.width = width;
+                }, 500 + index * 200);
+            });
+
+            // Performance optimization: Lazy load images
+            if ('IntersectionObserver' in window) {
+                const images = document.querySelectorAll('img[src]');
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeInUp 0.5s ease-out';
+                            imageObserver.unobserve(entry.target);
+                        }
+                    });
+                });
+                images.forEach(img => imageObserver.observe(img));
+            }
+        });
+
+        // ================= DYNAMIC CONTENT UPDATE =================
+        function updateDashboard(newData) {
+            // Update progress
+            if (newData.progress) {
+                document.getElementById('progressValue').textContent = newData.progress;
+            }
+            
+            // Update streak
+            if (newData.streak) {
+                document.getElementById('streakDays').textContent = newData.streak;
+                document.getElementById('badgeStreak').textContent = newData.streak;
+            }
+            
+            // Update energy points
+            if (newData.energyPoints) {
+                document.getElementById('energyPoints').textContent = newData.energyPoints.toLocaleString('ar-SA');
+            }
+
+            // Trigger animation for updated counters
+            animateAllCounters();
+        }
+
+        // ================= REAL-TIME DATA SYNC (Example) =================
+        // Uncomment to enable periodic updates
+        /*
+        setInterval(() => {
+            // Fetch updated data from server
+            // updateDashboard(newData);
+        }, 30000); // Update every 30 seconds
+        */
+
+    </script>
+
+</body>
+
+</html>
